@@ -9,8 +9,19 @@ jobs:
     runs-on: ubuntu-latest
     permissions: write-all
     steps:
-      - name: Add Reviewers
-        uses: buzato/add-reviewer-gh-action@1.0.5
-        with:
-          reviewers: "Dhruvil-Dobariya-30,HarshSaasinnova"
-          token: ${{ secrets.GITHUB_TOKEN }}
+    - name: Request Reviewers
+      uses: actions/github-script@v6
+      with:
+        script: |
+          // Define reviewers and teams
+          const reviewers = ['Dhruvil-Dobariya-30', 'HarshSaasinnova']; // GitHub usernames
+          const teamReviewers = ['org/team-name']; // Team slug (org-level team)
+
+          // Send review request
+          await github.rest.pulls.requestReviewers({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            pull_number: context.payload.pull_request.number,
+            reviewers: reviewers,
+            team_reviewers: teamReviewers,
+          });
