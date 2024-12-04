@@ -4,9 +4,10 @@ on:
   pull_request:
     types: [opened, ready_for_review, reopened, edited, synchronize]
   
-permissions: # Explicitly define permissions
-  pull-requests: write # Required for assigning reviewers
-  contents: read       # Default permission
+permissions: # Explicitly grant permissions for the reusable workflow
+  actions: write
+  pull-requests: write
+  contents: write
 
 
 jobs:
