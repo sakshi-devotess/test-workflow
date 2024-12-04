@@ -7,6 +7,7 @@ on:
 jobs:
   add-reviewers:
     runs-on: ubuntu-latest
+    permissions: write-all
     steps:
       - name: Add Reviewers
         uses: buzato/add-reviewer-gh-action@1.0.5
