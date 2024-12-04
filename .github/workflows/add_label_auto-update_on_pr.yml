@@ -2,9 +2,9 @@ name: Add label auto-update to new pull request
 
 on:
     pull_request:
-        types: [opened, reopened]
+        types: [opened, ready_for_review, reopened, edited, synchronize]
         branches:
-            - development
+            - main
 
 jobs:
     add-label-auto-update:
