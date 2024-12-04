@@ -6,20 +6,23 @@ on:
 
 jobs:
   add-reviewers:
-    runs-on: ubuntu-latest
-    permissions: write-all
-    steps:
-    - name: Request Reviewers
-      uses: actions/github-script@v6
-      with:
-        script: |
-          // Define reviewers and teams
-          const reviewers = ['Dhruvil-Dobariya-30', 'HarshSaasinnova']; // GitHub usernames
+    uses: 'SaaS-Innova/github-action/.github/workflows/auto_assign1.yml@main'
+    with:
+      reviewers: Dhruvil-Dobariya-30,HarshSaasinnova
+    # runs-on: ubuntu-latest
+    # permissions: write-all
+    # steps:
+    # - name: Request Reviewers
+    #   uses: actions/github-script@v6
+    #   with:
+    #     script: |
+    #       // Define reviewers and teams
+    #       const reviewers = ['Dhruvil-Dobariya-30', 'HarshSaasinnova']; // GitHub usernames
 
-          // Send review request
-          await github.rest.pulls.requestReviewers({
-            owner: context.repo.owner,
-            repo: context.repo.repo,
-            pull_number: context.payload.pull_request.number,
-            reviewers: reviewers,
-          });
+    #       // Send review request
+    #       await github.rest.pulls.requestReviewers({
+    #         owner: context.repo.owner,
+    #         repo: context.repo.repo,
+    #         pull_number: context.payload.pull_request.number,
+    #         reviewers: reviewers,
+    #       });
