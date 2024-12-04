@@ -12,3 +12,12 @@ jobs:
       uses: 'sakshi-devotess/github-action/.github/workflows/add-label-auto-update.yml@main'
       with:
         label: "auto-update"
+
+    auto-update:
+      uses: 'sakshi-devotess/github-action/.github/workflows/auto-update-head-branch.yml@main'
+      with:
+        base_branch: "main"
+        label_name: "auto-update"
+        repository : ${{ github.repository }}
+      secrets:
+        pat_token : ${{ secrets.GITHUB_TOKEN }}
