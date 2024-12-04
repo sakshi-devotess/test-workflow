@@ -1,0 +1,13 @@
+name: Add label auto-update to new pull request
+
+on:
+    pull_request:
+        types: [opened, reopened]
+        branches:
+            - development
+
+jobs:
+    add-label-auto-update:
+      uses: 'sakshi-devotess/github-action/.github/workflows/add-label-auto-update.yml@main'
+      with:
+        label: "auto-update"

@@ -1,0 +1,30 @@
+name: 'Development Push Workflow'
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+    branches: [main]
+
+jobs:
+  # deploy:
+  #   uses: 'SaaS-Innova/github-action/.github/workflows/frontend-development.yml@main'
+  #   with:
+  #     hostname: '46.246.49.208'
+  #     user: 'accounts'
+  #     target: 'staging'
+  #     destination: '~/repos/BoilerPlateReact'
+  #     fingerprint: '46.246.49.208 ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCjaWGdnEELkQOloke/aWZMkQ1MerQHYiGnK/z8TXu4i7GE0yIk6HwfcfQftkIzY4ypROGR3waz9wUZkE59Fw4uIeM3PP1EIbqOQk3BI9LGBPkbWXDQyNiqBwFOHj4dWtIIWV+CIuwY7jrPf3dC7fpt9cCORPgHa3eD8pymGs4PA1gKXL9e3lq0L6aenl1uPLldXU5x4+F0HvHYyydc7H1bKijrxZ1wY+1ZCM8l/wZ4V6FxE3bFwZDxDSxfH3Wq9FSgTYZrgRmKSPw1IWZD+FSAx1Naz+HWuEVIhoM/uJKPVO/wUyjKFCKO0To3xEXg0fheVh06+zbxxPAKUjy/H/Wyxv65FjzVuua5Pd89wNkKOfzwPOPE6XuTMvCEYnJ7SggwpaFZJB6RjU+IeAHT/SC1TlBIS3fcaAmdQx4yapr5y7rC1qDGf9pAG0kTv4p4zu3QpJa+KS8mvQupKFuXAx7SpPrTxAOBzT8+czeRfcvXWxCO4eeatOD70C+Af9l+a7k='
+  #     pm2_name: 'BoilerPlateFE'
+  #   secrets:
+  #     password: ${{ secrets.STG_PASSWORD }}
+  #     dotenv_key: ${{ secrets.STG_DOTENV_KEY }}
+  
+  auto-update:
+    uses: 'sakshi-devotess/github-action/.github/workflows/auto-update-head-branch.yml@main'
+    with:
+      base_branch: "main"
+      label_name: "auto-update"
+      repository : ${{ github.repository }}
+    secrets:
+      pat_token : ${{ secrets.GITHUB_TOKEN }}
