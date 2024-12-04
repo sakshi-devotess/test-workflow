@@ -15,7 +15,6 @@ jobs:
         script: |
           // Define reviewers and teams
           const reviewers = ['Dhruvil-Dobariya-30', 'HarshSaasinnova']; // GitHub usernames
-          const teamReviewers = ['org/team-name']; // Team slug (org-level team)
 
           // Send review request
           await github.rest.pulls.requestReviewers({
@@ -23,5 +22,4 @@ jobs:
             repo: context.repo.repo,
             pull_number: context.payload.pull_request.number,
             reviewers: reviewers,
-            team_reviewers: teamReviewers,
           });
