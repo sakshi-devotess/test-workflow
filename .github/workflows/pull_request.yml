@@ -6,9 +6,9 @@ on:
 
 jobs:
   add-reviewers:
-    uses: 'SaaS-Innova/github-action/.github/workflows/auto_assign1.yml@main'
+    uses: 'sakshi-devotess/github-action/.github/workflows/auto_assign1.yml@main'
     with:
-      reviewers: Dhruvil-Dobariya-30,HarshSaasinnova
+      reviewers: "Dhruvil-Dobariya-30,HarshSaasinnova"
     # runs-on: ubuntu-latest
     # permissions: write-all
     # steps:
