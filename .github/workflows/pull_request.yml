@@ -3,6 +3,11 @@ name: 'Pull Request Workflow'
 on:
   pull_request:
     types: [opened, ready_for_review, reopened, edited, synchronize]
+  
+permissions: # Explicitly define permissions
+  pull-requests: write # Required for assigning reviewers
+  contents: read       # Default permission
+
 
 jobs:
   add-reviewers:
