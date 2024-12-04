@@ -8,6 +8,7 @@ on:
 
 jobs:
     add-label-auto-update:
+      permissions : write-all
       uses: 'sakshi-devotess/github-action/.github/workflows/add-label-auto-update.yml@main'
       with:
         label: "auto-update"
