@@ -5,13 +5,11 @@ on:
     types: [opened, ready_for_review, reopened, edited, synchronize]
 
 jobs:
-  assign-reviewers1:
-    permissions: write-all
+  add-reviewers:
     runs-on: ubuntu-latest
-    
     steps:
-      - name: Add Pull Request Reviewer
-        uses: AveryCameronUofR/add-reviewer-gh-action@1.0.3
-        with: 
+      - name: Add Reviewers
+        uses: buzato/add-reviewer-gh-action@1.0.5
+        with:
           reviewers: "Dhruvil-Dobariya-30,HarshSaasinnova"
           token: ${{ secrets.GITHUB_TOKEN }}
