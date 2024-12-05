@@ -12,3 +12,8 @@ jobs:
       uses: 'sakshi-devotess/github-action/.github/workflows/add-label-auto-update.yml@main'
       with:
         label: "auto-update"
+
+    prettier:
+      uses: 'sakshi-devotess/github-action/.github/workflows/prettier.yml@main'
+      with:
+        prettier_options: '--check **/*.ts'
