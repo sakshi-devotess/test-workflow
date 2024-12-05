@@ -6,9 +6,9 @@ on:
 
 jobs:
   prettier:
-    uses: 'SaaS-Innova/github-action/.github/workflows/prettier.yml@main'
+    uses: 'sakshi-devotess/github-action/.github/workflows/prettier.yml@main'
     with:
-      prettier_options: '--check **/*.tsx'
+      prettier_options: '--check **/*.ts'
 
 
 
