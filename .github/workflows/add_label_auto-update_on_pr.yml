@@ -14,6 +14,7 @@ jobs:
         label: "auto-update"
 
     prettier:
+      permissions: write-all
       uses: 'sakshi-devotess/github-action/.github/workflows/prettier.yml@main'
       with:
         prettier_options: '--check **/*.js'
