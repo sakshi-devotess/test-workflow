@@ -34,64 +34,30 @@ jobs:
 
             - name: Get Oldest Pull Request
               id: get-oldest-pr
-              # run: |
-              #     GITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }}
-              #     GITHUB_REPOSITORY=${{ github.repository }}
-
-              #     echo "Use the GitHub API to fetch the oldest open pull request targeting 'main' branch"
-              #     oldest_pr_data=$(curl -s -H "Authorization: token $GITHUB_TOKEN" \
-              #       "https://api.github.com/repos/$GITHUB_REPOSITORY/pulls?state=open&base=main&sort=created&direction=asc")
-              #     echo "Raw GitHub API response:"
-              #     echo "$oldest_pr_data" | jq '.'
-              #       echo "Parse the JSON data to get the head branch name of the oldest pull request"
-              #       oldest_pr_head_branch=$(echo "$oldest_pr_data" | jq -r '.[] | select(.labels[].name == "auto-update" and .state == "open" and .auto_merge) | .head.ref' | head -n 1)
-
-              #     # Debugging output
-              #     echo "oldest_pr_head_branch: $oldest_pr_head_branch"
-
-              #     # Check if the oldest pull request number is set
-              #     if [ -n "$oldest_pr_head_branch" ]; then
-              #       echo "set the SKIP_UPDATE output variable"
-              #       echo "SKIP_UPDATE=false" >> $GITHUB_OUTPUT # Set the SKIP_UPDATE output variable
-              #       echo "set the HEAD_BRANCH_NAME environment variable"
-              #       echo "HEAD_BRANCH_NAME=$oldest_pr_head_branch" >> $GITHUB_ENV # Set the HEAD_BRANCH environment variable
-              #     else
-              #       echo "No open pull requests founds with 'auto-update' label and 'auto_merge' status."
-              #     fi
               run: |
-                GITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }}
-                GITHUB_REPOSITORY=${{ github.repository }}
+                  GITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }}
+                  GITHUB_REPOSITORY=${{ github.repository }}
 
-                # Fetch all open pull requests targeting 'main'
-                prs=$(curl -s -H "Authorization: token $GITHUB_TOKEN" \
-                  "https://api.github.com/repos/$GITHUB_REPOSITORY/pulls?state=open&base=main")
+                  echo "Use the GitHub API to fetch the oldest open pull request targeting 'main' branch"
+                  oldest_pr_data=$(curl -s -H "Authorization: token $GITHUB_TOKEN" \
+                    "https://api.github.com/repos/$GITHUB_REPOSITORY/pulls?state=open&base=main&sort=created&direction=asc")
+                  echo "Raw GitHub API response:"
+                  echo "$oldest_pr_data" | jq '.'
+                    echo "Parse the JSON data to get the head branch name of the oldest pull request"
+                    oldest_pr_head_branch=$(echo "$oldest_pr_data" | jq -r '.[] | select(.labels[].name == "auto-update" and .state == "open" and .auto_merge) | .head.ref' | head -n 1)
 
-                # Loop through each PR and check for 'auto-update' label
-                matching_pr=""
-                for pr_number in $(echo "$prs" | jq -r '.[].number'); do
-                    # Fetch labels for the current PR
-                    pr_labels=$(curl -s -H "Authorization: token $GITHUB_TOKEN" \
-                      "https://api.github.com/repos/$GITHUB_REPOSITORY/issues/$pr_number/labels")
+                  # Debugging output
+                  echo "oldest_pr_head_branch: $oldest_pr_head_branch"
 
-                    # Check if 'auto-update' label exists
-                    has_auto_update_label=$(echo "$pr_labels" | jq -r 'any(.[]; .name == "auto-update")')
-
-                    if [ "$has_auto_update_label" == "true" ]; then
-                        matching_pr=$pr_number
-                        break
-                    fi
-                done
-
-                # Handle the output
-                if [ -n "$matching_pr" ]; then
-                    # Fetch head branch name for the matching PR
-                    oldest_pr_head_branch=$(echo "$prs" | jq -r ".[] | select(.number == $matching_pr) | .head.ref")
-                    echo "HEAD_BRANCH_NAME=$oldest_pr_head_branch" >> $GITHUB_ENV
-                    echo "SKIP_UPDATE=false" >> $GITHUB_OUTPUT
-                else
-                    echo "No PRs with 'auto-update' label found."
-                    echo "SKIP_UPDATE=true" >> $GITHUB_OUTPUT
-                fi
+                  # Check if the oldest pull request number is set
+                  if [ -n "$oldest_pr_head_branch" ]; then
+                    echo "set the SKIP_UPDATE output variable"
+                    echo "SKIP_UPDATE=false" >> $GITHUB_OUTPUT # Set the SKIP_UPDATE output variable
+                    echo "set the HEAD_BRANCH_NAME environment variable"
+                    echo "HEAD_BRANCH_NAME=$oldest_pr_head_branch" >> $GITHUB_ENV # Set the HEAD_BRANCH environment variable
+                  else
+                    echo "No open pull requests founds with 'auto-update' label and 'auto_merge' status."
+                  fi
 
             - name: Ensure Current Branch is Up-to-Date and Conflict-Free
               env:
