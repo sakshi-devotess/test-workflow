@@ -1,15 +1,16 @@
 name: Auto Update Head Branch
 
 on:
-  pull_request:
-    types: [opened, ready_for_review, reopened, edited, synchronize]
+    push:
+        branches:
+            - 'main'
 
 jobs:
-  auto-update:
-    uses: sakshi-devotess/github-action/.github/workflows/auto-update-head-branch.yml@main
-    with:
-      base_branch: "main"
-      label_name: "auto-update"
-      repository: ${{ github.repository }}
-    secrets:
-      github_token: ${{ secrets.GITHUB_TOKEN }}
+    auto-update:
+        uses: sakshi-devotess/github-action/.github/workflows/auto-update-head-branch.yml@main
+        with:
+          base_branch: "main"
+          label_name: "auto-update"
+          repository: ${{ github.repository }}
+        secrets:
+          token: ${{ secrets.GITHUB_TOKEN }}
