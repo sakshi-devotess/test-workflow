@@ -38,9 +38,9 @@ jobs:
                   GITHUB_TOKEN=${{ secrets.ROHIT_PAT }}
                   GITHUB_REPOSITORY=${{ github.repository }}
 
-                  echo "Use the GitHub API to fetch the oldest open pull request targeting 'development' branch"
+                  echo "Use the GitHub API to fetch the oldest open pull request targeting 'main' branch"
                   oldest_pr_data=$(curl -s -H "Authorization: token $GITHUB_TOKEN" \
-                    "https://api.github.com/repos/$GITHUB_REPOSITORY/pulls?state=open&base=development&sort=created&direction=asc")
+                    "https://api.github.com/repos/$GITHUB_REPOSITORY/pulls?state=open&base=main&sort=created&direction=asc")
 
                     echo "Parse the JSON data to get the head branch name of the oldest pull request"
                     oldest_pr_head_branch=$(echo "$oldest_pr_data" | jq -r '.[] | select(.labels[].name == "auto-update" and .state == "open" and .auto_merge) | .head.ref' | head -n 1)
@@ -60,7 +60,7 @@ jobs:
 
             - name: Ensure Current Branch is Up-to-Date and Conflict-Free
               env:
-                  BASE_BRANCH: development
+                  BASE_BRANCH: main
               # if: success() && steps.get-oldest-pr.outputs.SKIP_UPDATE == 'false'
               run: |
                   HEAD_BRANCH=$HEAD_BRANCH_NAME # Use the HEAD_BRANCH_NAME environment variable
