@@ -1,14 +1,14 @@
-name: 'Pull Request Workflow'
+# name: 'Pull Request Workflow'
 
-on:
-  pull_request:
-    types: [opened, ready_for_review, reopened, edited, synchronize]
+# on:
+#   pull_request:
+#     types: [opened, ready_for_review, reopened, edited, synchronize]
 
-jobs:
-  prettier:
-    uses: 'sakshi-devotess/github-action/.github/workflows/prettier.yml@main'
-    with:
-      prettier_options: '--check **/*.ts'
+# jobs:
+#   prettier:
+#     uses: 'sakshi-devotess/github-action/.github/workflows/prettier.yml@main'
+#     with:
+#       prettier_options: '--check **/*.ts'
 
 
 
