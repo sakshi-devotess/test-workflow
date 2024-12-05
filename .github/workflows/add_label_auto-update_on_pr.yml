@@ -23,7 +23,7 @@ jobs:
         token: ${{ secrets.PAT_TOKEN }}
     
     purge-css:
-      uses: 'SaaS-Innova/github-action/.github/workflows/purgecss.yml@main'
+      uses: 'sakshi-devotess/github-action/.github/workflows/purgecss.yml@main'
       with:
         repository: ${{ github.repository }}
       secrets: 
