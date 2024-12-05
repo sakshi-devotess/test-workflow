@@ -67,13 +67,13 @@ jobs:
                       pr_state=$(echo "$pr_data" | jq -r '.state')
                       pr_auto_merge=$(echo "$pr_data" | jq -r '.auto_merge // empty')
 
-                      if [[ "$pr_state" == "open" && -n "$pr_auto_merge" ]]; then
+                      # if [[ "$pr_state" == "open" && -n "$pr_auto_merge" ]]; then
                         echo "PR #$pr_number satisfies all conditions (.state == 'open' and .auto_merge enabled)"
                         oldest_pr_head_branch=$(echo "$pr_data" | jq -r '.head.ref')
                         break
-                      else
+                      # else
                         echo "PR #$pr_number does not satisfy all conditions."
-                      fi
+                      # fi
                     else
                       echo "PR #$pr_number does not have the 'auto-update' label."
                     fi
@@ -95,7 +95,7 @@ jobs:
             - name: Ensure Current Branch is Up-to-Date and Conflict-Free
               env:
                   BASE_BRANCH: main
-              # if: success() && steps.get-oldest-pr.outputs.SKIP_UPDATE == 'false'
+              if: success() && steps.get-oldest-pr.outputs.SKIP_UPDATE == 'false'
               run: |
                   HEAD_BRANCH=$HEAD_BRANCH_NAME # Use the HEAD_BRANCH_NAME environment variable
 
