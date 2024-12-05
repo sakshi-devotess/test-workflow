@@ -46,7 +46,7 @@ jobs:
                   echo "$oldest_pr_data" | jq '.'
 
                   echo "Parse the JSON data to get the head branch name of the oldest pull request"
-                  oldest_pr_head_branch=$(echo "$oldest_pr_data" | jq -r '.[] | select(.state == "open") | .head.ref' | head -n 1)
+                  oldest_pr_head_branch=$(echo "$oldest_pr_data" | jq -r '.[] | select(.state == "open" and .auto_merge) | .head.ref' | head -n 1)
 
                   # Debugging output
                   echo "oldest_pr_head_branch: $oldest_pr_head_branch"
