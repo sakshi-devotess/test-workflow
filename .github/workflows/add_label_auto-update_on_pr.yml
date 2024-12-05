@@ -16,4 +16,4 @@ jobs:
     prettier:
       uses: 'sakshi-devotess/github-action/.github/workflows/prettier.yml@main'
       with:
-        prettier_options: '--check **/*.ts'
+        prettier_options: '--check **/*.js'
