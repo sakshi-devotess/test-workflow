@@ -20,4 +20,4 @@ jobs:
         label_name: "auto-update"
         repository: ${{ github.repository }}
       secrets:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
+        token: ${{ secrets.GITHUB_TOKEN }}
