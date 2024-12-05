@@ -18,5 +18,6 @@ jobs:
       uses: 'sakshi-devotess/github-action/.github/workflows/prettier.yml@main'
       with:
         prettier_options: '--check **/*.js'
+        repository: ${{ github.repository }}
       secrets: 
         token: ${{ secrets.PAT_TOKEN }}
