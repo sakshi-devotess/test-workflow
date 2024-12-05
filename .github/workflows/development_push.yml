@@ -61,7 +61,7 @@ jobs:
             - name: Ensure Current Branch is Up-to-Date and Conflict-Free
               env:
                   BASE_BRANCH: main
-              if: success() && steps.get-oldest-pr.outputs.SKIP_UPDATE == 'false'
+              # if: success() && steps.get-oldest-pr.outputs.SKIP_UPDATE == 'false'
               run: |
                   HEAD_BRANCH=$HEAD_BRANCH_NAME # Use the HEAD_BRANCH_NAME environment variable
 
