@@ -18,8 +18,8 @@ jobs:
       uses: 'sakshi-devotess/github-action/.github/workflows/prettier.yml@main'
       with:
         prettier_options: '--check **/*.js'
-      secrets: 
-        token: ${{ secrets.GITHUB_TOKEN }}
+      # secrets: 
+      #   token: ${{ secrets.GITHUB_TOKEN }}
     
     purge-css:
       uses: 'sakshi-devotess/github-action/.github/workflows/purgecss.yml@main'
