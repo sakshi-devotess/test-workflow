@@ -23,7 +23,5 @@ jobs:
     
     purge-css:
       uses: 'sakshi-devotess/github-action/.github/workflows/purgecss.yml@main'
-      with:
-        repository: ${{ github.repository }}
       secrets: 
-        token: ${{ secrets.GITHUB_TOKEN }}
+        token: ${{ secrets.PAT_TOKEN }}
