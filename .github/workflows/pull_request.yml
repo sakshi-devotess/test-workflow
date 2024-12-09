@@ -1,29 +1,43 @@
-name: 'Pull Request Workflow'
+# name: 'Pull Request Workflow'
 
-on:
-  pull_request:
-    types: [opened, ready_for_review, reopened, edited, synchronize]
+# on:
+#   pull_request:
+#     types: [opened, ready_for_review, reopened, edited, synchronize]
 
-jobs:
-  add-reviewers:
-    permissions: write-all
-    uses: 'SaaS-Innova/github-action/.github/workflows/auto_assign1.yml@main'
-    with:
-      reviewers: "Dhruvil-Dobariya-30,HarshSaasinnova"
-    # runs-on: ubuntu-latest
-    # permissions: write-all
-    # steps:
-    # - name: Request Reviewers
-    #   uses: actions/github-script@v6
-    #   with:
-    #     script: |
-    #       // Define reviewers and teams
-    #       const reviewers = ['Dhruvil-Dobariya-30', 'HarshSaasinnova']; // GitHub usernames
+# jobs:
+#   prettier:
+#     uses: 'sakshi-devotess/github-action/.github/workflows/prettier.yml@main'
+#     with:
+#       prettier_options: '--check **/*.ts'
 
-    #       // Send review request
-    #       await github.rest.pulls.requestReviewers({
-    #         owner: context.repo.owner,
-    #         repo: context.repo.repo,
-    #         pull_number: context.payload.pull_request.number,
-    #         reviewers: reviewers,
-    #       });
+
+
+# name: 'Pull Request Workflow'
+
+# on:
+#   pull_request:
+#     types: [opened, ready_for_review, reopened, edited, synchronize]
+
+# jobs:
+#   add-reviewers:
+#     permissions: write-all
+#     uses: 'SaaS-Innova/github-action/.github/workflows/auto_assign1.yml@main'
+#     with:
+#       reviewers: "Dhruvil-Dobariya-30,HarshSaasinnova"
+#     # runs-on: ubuntu-latest
+#     # permissions: write-all
+#     # steps:
+#     # - name: Request Reviewers
+#     #   uses: actions/github-script@v6
+#     #   with:
+#     #     script: |
+#     #       // Define reviewers and teams
+#     #       const reviewers = ['Dhruvil-Dobariya-30', 'HarshSaasinnova']; // GitHub usernames
+
+#     #       // Send review request
+#     #       await github.rest.pulls.requestReviewers({
+#     #         owner: context.repo.owner,
+#     #         repo: context.repo.repo,
+#     #         pull_number: context.payload.pull_request.number,
+#     #         reviewers: reviewers,
+#     #       });

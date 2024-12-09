@@ -1,9 +1,14 @@
 name: Auto Update Head Branch
 
+# on:
+#     push:
+#         branches:
+#             - 'main'
 on:
-    push:
-        branches:
-            - 'main'
+  push:
+    branches: [main]
+  workflow_dispatch:
+    branches: [main]
 
 jobs:
     auto-update:
