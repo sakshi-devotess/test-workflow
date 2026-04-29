@@ -6,36 +6,6 @@ on:
 
 jobs:
   claude-review:
-    runs-on: ubuntu-latest
-    environment: pr-action
-    permissions:
-      contents: write
-      pull-requests: write
-      id-token: write
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 1
-      - name: Claude PR Review
-        uses: anthropics/claude-code-action@v1
-        with:
-          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
-          track_progress: true
-          prompt: |
-            REPO: ${{ github.repository }}
-            PR NUMBER: ${{ github.event.pull_request.number }}
-
-            Act as a senior QA engineer specializing in Playwright.
-
-            Please provide a playwright-focused review with emphasis on:
-            - Playwright best practices
-            - Playwright code quality
-            - Playwright code structure
-            - Playwright code readability
-
-            Note: The PR branch is already checked out.
-            Add inline PR comments on relevant lines when applicable.
-
-            Post detailed playwright findings as PR comments.
-          claude_args: |
-            --allowedTools "mcp__github_inline_comment__create_inline_comment,Bash(gh pr comment:*)"
+    uses: sakshi-devotess/github-action/.github/workflows/claude-review.yml@main
+    secrets:
+      anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
