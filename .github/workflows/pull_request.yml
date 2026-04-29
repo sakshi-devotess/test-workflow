@@ -1,43 +1,40 @@
-# name: 'Pull Request Workflow'
+name: "Pull Request Workflow"
 
-# on:
-#   pull_request:
-#     types: [opened, ready_for_review, reopened, edited, synchronize]
+on:
+  pull_request:
+    types: [opened, ready_for_review, reopened, edited, synchronize]
 
-# jobs:
-#   prettier:
-#     uses: 'sakshi-devotess/github-action/.github/workflows/prettier.yml@main'
-#     with:
-#       prettier_options: '--check **/*.ts'
+jobs:
+  claude-review:
+    runs-on: ubuntu-latest
+    environment: pr-action
+    permissions:
+      contents: write
+      pull-requests: write
+      id-token: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+      - name: Claude PR Review
+        uses: anthropics/claude-code-action@v1
+        with:
+          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          track_progress: true
+          prompt: |
+            REPO: ${{ github.repository }}
+            PR NUMBER: ${{ github.event.pull_request.number }}
 
+            This PR modifies critical playwright files.
 
+            Please provide a playwright-focused review with emphasis on:
+            - Playwright best practices
+            - Playwright code quality
+            - Playwright code structure
+            - Playwright code readability
 
-# name: 'Pull Request Workflow'
+            Note: The PR branch is already checked out.
 
-# on:
-#   pull_request:
-#     types: [opened, ready_for_review, reopened, edited, synchronize]
-
-# jobs:
-#   add-reviewers:
-#     permissions: write-all
-#     uses: 'SaaS-Innova/github-action/.github/workflows/auto_assign1.yml@main'
-#     with:
-#       reviewers: "Dhruvil-Dobariya-30,HarshSaasinnova"
-#     # runs-on: ubuntu-latest
-#     # permissions: write-all
-#     # steps:
-#     # - name: Request Reviewers
-#     #   uses: actions/github-script@v6
-#     #   with:
-#     #     script: |
-#     #       // Define reviewers and teams
-#     #       const reviewers = ['Dhruvil-Dobariya-30', 'HarshSaasinnova']; // GitHub usernames
-
-#     #       // Send review request
-#     #       await github.rest.pulls.requestReviewers({
-#     #         owner: context.repo.owner,
-#     #         repo: context.repo.repo,
-#     #         pull_number: context.payload.pull_request.number,
-#     #         reviewers: reviewers,
-#     #       });
+            Post detailed playwright findings as PR comments.
+          claude_args: |
+            --allowedTools "mcp__github_inline_comment__create_inline_comment,Bash(gh pr comment:*)"

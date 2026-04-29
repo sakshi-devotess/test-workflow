@@ -1,0 +1,3 @@
+[submodule "src/submodule/button"]
+	path = src/submodule/button
+	url = https://github.com/SaaS-Innova/submodule-frontend-component-button.git
